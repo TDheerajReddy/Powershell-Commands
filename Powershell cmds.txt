@@ -1,0 +1,67 @@
+get-command					//display all Commands
+get-command -CommandType Function		//to get command specific type
+get-command *Item				// Search command with name, use Asterisk
+
+get-help
+get-help move-item
+Get-Help Move-Item -Example
+
+
+get-psdrive
+get-psdrive -psprovider filesystem
+
+get-childitem
+get-childitem F:
+get-childitem F:\Creed
+get-childitem E:\'1 JECRC Study'
+
+Set-Location E:\'1 jecrc study'
+
+new-item -itemtype directory test2
+new-item -itemtype directory -name test4
+new-item -itemtype directory -path F:\ -name test
+
+new-item -itemtype file -path F:\test -name testfile1.txt -value "This is the first Powershell text file."
+new-item -itemtype file -path F:\test -name testfile2.txt
+new-item -itemtype file -name testfile3.txt				//if same directory
+set-content -path F:\test\testfile1.txt -value "Editted text"		//Replace Content
+
+set-location \test		//change he folder in same drive
+get-item testfile1.txt		//get info of file
+get-content testfile1.txt	//to view the file data
+get-content testfile1.txt | out-gridview		// to view in the External Window
+get-content testfile1.txt | out-printer			/to print or to convert in PDF
+
+rename-item -path \test2 -newname test100			//Rename Directory
+rename-item -path \test\testfile2.txt -newname test100.txt	//Rename File
+
+copy-item -path F:\test\test100.txt -destination F:\test100
+move-item -path F:\test\test100.txt -destination F:\test100\testmove.txt	//move with Renaming file
+move-item -path F:\test100\testmove.txt -destination F:\test			//only move
+move-item -path F:\test\test100.txt -destination E:\				//moving to another drive
+
+remove-item E:\test100.txt
+remove-item F:\test4
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+//Getting the list of Process and Services
+get-process
+get-service
+
+//To Stop Process
+stop-process -name notepad
+get-process notepad
+stop-process -id 12576
+stop-process -id 15264 -Confirm -PassThru
+
+
+//Get the list of Windows Driver
+Get-WindowsDriver -Online -All			//run as administrator
+
+//Taking Backup of the Drivers
+Export-WindowsDriver -Online -Destination E\Test\DriverBackup
+
+//Scan for Maleware
+Start-MPScan -ScanType QuickScan -ScanPAth E:\'1 Jecrc Study'
